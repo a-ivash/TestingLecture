@@ -9,8 +9,8 @@ import java.util.Random;
 
 import static org.junit.Assert.*;
 
-
 public class StatisticsServiceImplTest {
+    /** Used to get random iteration counter*/
     private Random random = new Random();
     private static StatisticService statisticService;
     private static CountingService countingService;

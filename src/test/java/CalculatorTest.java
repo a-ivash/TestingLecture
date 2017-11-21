@@ -23,6 +23,9 @@ public class CalculatorTest {
     @InjectMocks
     private Calculator calculator;
 
+    /**
+     * Testing adding values and substituting return result with custom object.
+     * */
     @Test
     public void addTest() {
         ComplexObject objectA = new ComplexObject(1, 2);
@@ -36,6 +39,9 @@ public class CalculatorTest {
         Mockito.verify(service, Mockito.times(1)).add(objectA, objectB);
     }
 
+    /**
+     * Testing subtracting values and substituting return result with custom object.
+     * */
     @Test
     public void subtractTest() {
         ComplexObject objectA = new ComplexObject(1, 2, Service.TWO);
@@ -48,6 +54,9 @@ public class CalculatorTest {
         assertEquals(expectedObject, resultObject);
     }
 
+    /**
+     * Substituting calls for statistics service counter increment
+     * */
     @Test
     public void checkCallsCounter() {
         int expectedAddCallsCounter = 100;
@@ -66,6 +75,9 @@ public class CalculatorTest {
         calculator.divide(objectA, objectB);
     }
 
+    /**
+     * Math operations can be performed only on objects with same Service values
+     * */
     @Test(expected = IllegalArgumentException.class)
     public void differentServicesTest() {
         ComplexObject objectA = new ComplexObject(1, 2);
@@ -74,6 +86,9 @@ public class CalculatorTest {
         ComplexObject resultObject = calculator.add(objectA, objectB);
     }
 
+    /**
+     * both valueA and valueB must be positive
+     * */
     @Test(expected = IllegalArgumentException.class)
     public void invalidValueServiceTwoTest() {
         ComplexObject objectA = new ComplexObject(-1, 2, Service.TWO);
@@ -81,6 +96,11 @@ public class CalculatorTest {
         calculator.multiply(objectA, objectB);
     }
 
+    /**
+     * Checking for failing validation for third service type.
+     * valueA = -100 or 50
+     * valueB only negative
+     * */
     @Test(expected = IllegalArgumentException.class)
     public void invalidValueServiceThreeTest() {
         ComplexObject objectA = new ComplexObject(-100, -2, Service.THREE);
